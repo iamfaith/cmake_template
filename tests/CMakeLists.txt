@@ -1,8 +1,10 @@
-include_directories(${CMAKE_SOURCE_DIR}/src)
+# include_directories(${CMAKE_SOURCE_DIR}/src/lib)
+
 
 macro(cpp_add_test name)
     add_executable(test_${name} test_${name}.cpp)
     target_link_libraries(test_${name} PUBLIC func)
+    target_include_directories(test_${name} PUBLIC ${LIB_HEADER})
 
     add_test(NAME test_${name} COMMAND ${CMAKE_COMMAND} -DTEST_EXECUTABLE=$<TARGET_FILE:test_${name}> -P ${CMAKE_CURRENT_SOURCE_DIR}/run_test.cmake)
 
